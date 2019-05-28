@@ -1371,6 +1371,8 @@ answer.decode = function (buf, offset) {
     offset += 8 + enc.decode.bytes
   }
 
+  a.size = offset - oldOffset;
+
   answer.decode.bytes = offset - oldOffset
   return a
 }
@@ -1419,6 +1421,8 @@ question.decode = function (buf, offset) {
 
   q.class = classes.toString(buf.readUInt16BE(offset))
   offset += 2
+
+  q.size = offset - oldOffset;
 
   const qu = !!(q.class & QU_MASK)
   if (qu) q.class &= NOT_QU_MASK
